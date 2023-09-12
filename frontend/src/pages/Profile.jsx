@@ -78,7 +78,7 @@ const Profile = () => {
           ></Form.Control>
         </Form.Group>
         <Form.Group className="my-2" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>New Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Enter password"
@@ -87,7 +87,7 @@ const Profile = () => {
           ></Form.Control>
         </Form.Group>
         <Form.Group className="my-2" controlId="confirmPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Confirm password"

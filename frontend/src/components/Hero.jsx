@@ -1,9 +1,28 @@
 import { Container, Card, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "../slices/usersApiSlice";
+import { clearCredentials } from "../slices/authSlice";
+import { toast } from "react-toastify";
 
 const Hero = () => {
   const { userInfo } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [logout] = useLogoutMutation();
+
+  const logoutHandler = async () => {
+    try {
+      await logout().unwrap();
+      dispatch(clearCredentials());
+      navigate("/");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
   return (
     <div className="py-5">
@@ -25,7 +44,7 @@ const Hero = () => {
                   </Button>
                 </LinkContainer>
                 <LinkContainer to="/logout">
-                  <Button variant="danger" href="/logout" className="">
+                  <Button variant="danger" onClick={logoutHandler}>
                     Logout
                   </Button>
                 </LinkContainer>
